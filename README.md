@@ -48,5 +48,17 @@ If you see that the exercise takes too much time to implement even *without* wri
 please **LET ME KNOW** and I will drop the request for tests from the exercise submission.
 
 ---
+Q:
+We didn't define any UX flow to let users edit a descrption on an existing TODO item.
+Which UX flow will you define?
+In your response notice the following:
+1. how easy is it for users to figure out this flow in their first usage? (for example, a glowing button is more discoverable then a swipe-left gesture)
+2. how hard to implement will your solution be?
+3. how consistent is this flow with regular "edit" flows in the Android world?
+A:
+I would add an edit button with a pencil
+The implentaion is pretty easy, use a built in button.
+It is also pretty regular to Android users, so easy for me and easy for them:)
 
+"I pledge the highest level of ethical principles in support of academic excellence.  I ensure that all of my work reflects my own abilities and not those of someone else."
 ✨ Good luck! ✨

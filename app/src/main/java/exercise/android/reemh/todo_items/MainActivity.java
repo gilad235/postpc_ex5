@@ -5,26 +5,92 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
   public TodoItemsHolder holder = null;
+  Adapter adapter = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
     if (holder == null) {
       holder = new TodoItemsHolderImpl();
     }
+    if (adapter == null) {
+      adapter = new Adapter(holder);
+    }
+
+    FloatingActionButton buttonCreateTodoItem = findViewById(R.id.buttonCreateTodoItem);
+    EditText editText = findViewById(R.id.editTextInsertTask);
+    RecyclerView recyclerView = findViewById(R.id.recyclerTodoItemsList);
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    recyclerView.setAdapter(adapter);
+    // set initial UI:
+    buttonCreateTodoItem.setEnabled(false);
+    editText.setEnabled(true);
+
+    editText.addTextChangedListener(new TextWatcher() {
+      public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+      public void onTextChanged(CharSequence s, int start, int before, int count) { }
+      public void afterTextChanged(Editable s) {
+        // text did change
+        String newText = editText.getText().toString();
+        // todo: check conditions to decide if button should be enabled/disabled (see spec below)
+        buttonCreateTodoItem.setEnabled(true);
+//        editText.setText(newText);
+//        holder.addNewInProgressItem(newText);
+      }
+    });
+
+    // set click-listener to the button
+    buttonCreateTodoItem.setOnClickListener(v -> {
+//      Intent intentToOpenService = new Intent(MainActivity.this, CalculateRootsService.class);
+      String userInputString = editText.getText().toString();
+      holder.addNewInProgressItem(userInputString);
+      editText.setText("");
+      buttonCreateTodoItem.setEnabled(false);
+      adapter.notifyDataSetChanged();
+    });
+
 
     // TODO: implement the specs as defined below
     //    (find all UI components, hook them up, connect everything you need)
+  }
+
+
+  @Override
+  protected void onSaveInstanceState(@NonNull Bundle outState) {
+    super.onSaveInstanceState(outState);
+    EditText editTextUserInput = findViewById(R.id.editTextInsertTask);
+    Button buttonCalculateRoots = findViewById(R.id.buttonCreateTodoItem);
+    outState.putBoolean("editTextUserEnabaled",editTextUserInput.isEnabled());
+    String str = editTextUserInput.getText().toString();
+    outState.putString("editTextUserstr",str);
+    outState.putBoolean("buttonCalculateRoots",buttonCalculateRoots.isEnabled());
+  }
+
+  @Override
+  protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    EditText editTextUserInput = findViewById(R.id.editTextInsertTask);
+    Button buttonCalculateRoots = findViewById(R.id.buttonCreateTodoItem);
+    editTextUserInput.setText(savedInstanceState.getString("editTextUserstr"));
+    editTextUserInput.setEnabled(savedInstanceState.getBoolean("editTextUserEnabaled"));
+    buttonCalculateRoots.setEnabled(savedInstanceState.getBoolean("buttonCalculateRoots"));
   }
 }
 
