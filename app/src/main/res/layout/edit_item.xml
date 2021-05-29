@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/editTodoItem_creatonDate"
+        android:layout_width="174dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="672dp"
+        android:maxLines="1"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:prefixText="creation date: " />
+
+    <TextView
+        android:id="@+id/editTodoItem_modifiedDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginBottom="668dp"
+        android:elevation="4dp"
+        android:maxLines="1"
+        android:paddingStart="11dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="161dp"
+        android:paddingBottom="8dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:prefixText="modified date: " />
+
+    <Button
+        android:id="@+id/editTodoItem_status"
+        android:layout_width="121dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="544dp"
+        android:background="@drawable/ic_add_task_24dp"
+        android:elevation="4dp"
+        android:maxLines="1"
+        android:paddingStart="11dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="161dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTodoItem_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginBottom="588dp"
+        android:background="@drawable/colored_rect_with_rounded_corners"
+        android:elevation="4dp"
+        android:maxLines="1"
+        android:paddingStart="11dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="161dp"
+        android:paddingBottom="8dp"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:prefixText="task: " />
+</androidx.constraintlayout.widget.ConstraintLayout>

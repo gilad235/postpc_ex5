@@ -5,16 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     if (holder == null) {
-      holder = new TodoItemsHolderImpl();
+      holder = TodoApplication.getInstance().getDb();
     }
     if (adapter == null) {
       adapter = new Adapter(holder);
@@ -76,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onSaveInstanceState(@NonNull Bundle outState) {
     super.onSaveInstanceState(outState);
     EditText editTextUserInput = findViewById(R.id.editTextInsertTask);
-    Button buttonCalculateRoots = findViewById(R.id.buttonCreateTodoItem);
+    FloatingActionButton buttonCalculateRoots = findViewById(R.id.buttonCreateTodoItem);
     outState.putBoolean("editTextUserEnabaled",editTextUserInput.isEnabled());
     String str = editTextUserInput.getText().toString();
     outState.putString("editTextUserstr",str);
@@ -87,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
     super.onRestoreInstanceState(savedInstanceState);
     EditText editTextUserInput = findViewById(R.id.editTextInsertTask);
-    Button buttonCalculateRoots = findViewById(R.id.buttonCreateTodoItem);
+    FloatingActionButton buttonCalculateRoots = findViewById(R.id.buttonCreateTodoItem);
     editTextUserInput.setText(savedInstanceState.getString("editTextUserstr"));
     editTextUserInput.setEnabled(savedInstanceState.getBoolean("editTextUserEnabaled"));
     buttonCalculateRoots.setEnabled(savedInstanceState.getBoolean("buttonCalculateRoots"));

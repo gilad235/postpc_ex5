@@ -1,6 +1,7 @@
 package exercise.android.reemh.todo_items;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private TodoItemsHolder todoItemsHolder;
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgview;
-        TextView textView;
+        Button textView;
         Button doneButton;
         Button deleteButton;
 
@@ -81,7 +82,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             todoItemsHolder.deleteItem(item);
             notifyDataSetChanged();
         });
-
+        holder.textView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(),Edit.class);
+            intent.putExtra("id",item.getId());
+            v.getContext().startActivity(intent);
+            notifyDataSetChanged();
+        });
 
     }
     public TodoItemsHolder getTodoItemsHolder() {
